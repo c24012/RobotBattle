@@ -24,7 +24,7 @@ public class MissileBulletSc : MonoBehaviour
     float moveSpeed = 0;        //‘¬“x
     bool isTracking = false;    //’ÇÕ’†
     bool isAccel = false;       //‰Á‘¬’†
-    bool isExplosive = false;   //ày—ô’e
+    //bool isExplosive = false;   //ày—ô’e
 
     public void SetTargetObj(GameObject target)
     {
