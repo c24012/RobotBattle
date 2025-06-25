@@ -7,6 +7,16 @@ public class BarrierScript : MonoBehaviour
     public CoreScript coreScript;
     public BarrierManager barrierManager;
 
+    private void Start()
+    {
+        int Barrier = LayerMask.NameToLayer("Barrier");
+        int Floor = LayerMask.NameToLayer("Floor");
+        int Player = LayerMask.NameToLayer("Player");
+
+        Physics.IgnoreLayerCollision(Barrier, Floor);
+        Physics.IgnoreLayerCollision(Barrier, Player);
+    }
+
     //ダメージを計算するためにtriggerを使う（playerのisTriggerをtrue）
     private void OnCollisionEnter(Collision collision)
     {
