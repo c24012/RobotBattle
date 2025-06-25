@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ public class MacineGunScript : LiveGunOriginScript
 
     void Start()
     {
-        //MacineGun—p‚Éƒpƒ‰ƒ[ƒ^[‚ğİ’è
+        //MacineGunç”¨ã«ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼ã‚’è¨­å®š
         bulletAmount = 30;
         bulletSpeed = 15;
         fireRate = 6;
@@ -16,28 +16,19 @@ public class MacineGunScript : LiveGunOriginScript
         fireEnergyReq = 2;
         reloadEnergyReq = bulletAmount * fireEnergyReq / 3;
 
-        //’eƒvƒŒƒnƒu‚ğ‘•’e”~2ŒÂ•ª—pˆÓ
-        unUsedBulletList = BulletInst(bulletAmount);
-        usedBulletList = BulletInst(bulletAmount * 2);
-
-
-        //’e‚ÌƒXƒNƒŠƒvƒgæ“¾
-        foreach (var list in unUsedBulletList)
-        {
-            unUsedBulletSCList.Add(list.GetComponent<BulletScript>());
-        }
-        foreach (var list in usedBulletList)
-        {
-            usedBulletSCList.Add(list.GetComponent<BulletScript>());
-        }
+        Preparation();
     }
 
     void Update()
     {
+
+        
+
+
+
         if (Input.GetButton("Fire1"))
         {
             StartCoroutine(Fire());
         }
     }
-
 }
