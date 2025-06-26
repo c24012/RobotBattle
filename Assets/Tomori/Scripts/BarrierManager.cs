@@ -22,7 +22,7 @@ public class BarrierManager : MonoBehaviour
 
     public CoreScript coreScript;
 
-    public const int TISEBA = 30;
+    public const int TISEBA = 100;
 
     private void Awake()
     {
