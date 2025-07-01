@@ -30,35 +30,6 @@ public class LiveGunOriginScript : MonoBehaviour
     public EnergyScript energySC;//エネルギースクリプト
     public CoreScript coreSC;//コアスクリプト
 
-    private void Update()
-    {
-        Vector3 currentEuler = gunObj.transform.localEulerAngles;
-
-        // Y軸だけ -180〜180度に変換して制限
-        var angleY = currentEuler.y;
-        var angleX = currentEuler.x;
-        if (angleY > 180f)
-        {
-            angleY -= 360f;
-        }
-        if (angleX > 180f)
-        {
-            angleX -= 360f;
-        }
-        angleY = Mathf.Clamp(angleY, -22.5f, 22.5f);
-        angleX = Mathf.Clamp(angleX, -67.5f, 67.5f);
-        if (angleY < 0f)
-        {
-            angleY += 360f;
-        }
-        if (angleX < 0f)
-        {
-            angleX += 360f;
-        }
-
-        // 他の軸はそのまま
-        gunObj.transform.localEulerAngles = new Vector3(angleX, angleY, currentEuler.z);
-    }
     public void Preparation()
     {
         gunObj = transform.parent.gameObject;
