@@ -157,7 +157,9 @@ MonoBehaviour:
   reloadTime: 0
   fireEnergyReq: 0
   reloadEnergyReq: 0
+  isShotGun: 0
   gunObj: {fileID: 0}
+  targetEnemy: {fileID: 0}
   bulletObj: {fileID: 2786622016097322360, guid: 29e24293a05a8254aad7523203f5e384, type: 3}
   unUsedBulletList: []
   usedBulletList: []

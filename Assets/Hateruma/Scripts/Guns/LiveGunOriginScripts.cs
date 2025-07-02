@@ -14,6 +14,8 @@ public class LiveGunOriginScript : MonoBehaviour
     public int fireEnergyReq;//必要エネルギー(1発あたり)
     public int reloadEnergyReq;//必要エネルギー(リロード時)
 
+    public bool isShotGun = false;//ショットガンかどうか
+
     bool isReload = false;//リロード中かどうか
 
     bool isRunningFire = false;//発射処理のコルーチンが動いているか
@@ -50,9 +52,9 @@ public class LiveGunOriginScript : MonoBehaviour
         }
     }
 
-    
 
-    public List<GameObject> BulletInst(int amount)
+
+    List<GameObject> BulletInst(int amount)
     {
         var bulletList = new List<GameObject>();
         //弾プレハブを装弾数分用意
@@ -71,7 +73,7 @@ public class LiveGunOriginScript : MonoBehaviour
 
 
     //球発射関数
-    public IEnumerator Fire(bool isShotGun = false)
+    public IEnumerator Fire(GameObject targetObj = null)
     {
 
         //コルーチン重複防止
@@ -81,6 +83,8 @@ public class LiveGunOriginScript : MonoBehaviour
         }
 
         isRunningFire = true;
+
+        TargetLook(targetObj);
 
         //残弾があれば撃つ
         if (unUsedBulletList.Count > 0 && energySC.UseEnergy(fireEnergyReq))
@@ -109,7 +113,7 @@ public class LiveGunOriginScript : MonoBehaviour
                 for (int i = 0; i < 9; i++)
                 {
                     //アングルをランダムに変えてばらけさせる
-                    transform.localEulerAngles = new Vector3(Random.Range(-7.5f, 7.5f), Random.Range(0f, 360f));
+                    transform.localEulerAngles = new Vector3(Random.Range(-7.5f, 7.5f), Random.Range(-7.5f, 7.5f));
                     unUsedBulletList[0].transform.position = transform.position;
                     unUsedBulletList[0].transform.rotation = transform.rotation;
 
@@ -146,7 +150,7 @@ public class LiveGunOriginScript : MonoBehaviour
     }
 
     //リロード関数
-    public IEnumerator Reload()
+    IEnumerator Reload()
     {
         yield return new WaitForSeconds(reloadTime);//リロード時間
 
@@ -163,4 +167,36 @@ public class LiveGunOriginScript : MonoBehaviour
         isReload = false;
     }
 
+    bool TargetLook(GameObject targetObj)
+    {
+        if (targetObj != null)
+        {
+            
+
+            //現在の銃本体の回転の値を取得
+            Vector3 movedAngle = new Vector3(gunObj.transform.localEulerAngles.x, gunObj.transform.localEulerAngles.y);
+            movedAngle.x = movedAngle.x <= 180f ? Mathf.Abs(movedAngle.x) : Mathf.Abs(movedAngle.x - 360f);//X軸
+            movedAngle.y = movedAngle.y <= 180f ? Mathf.Abs(movedAngle.y) : Mathf.Abs(movedAngle.y - 360f);//Y軸
+            
+
+            Vector3 targetDir = targetObj.transform.position - gunObj.transform.position;//ターゲットの方向
+            float angle = Vector3.Angle(targetDir, gunObj.transform.forward);//銃本体とターゲットの方向の差分
+
+            Debug.Log($"{angle - movedAngle.x} + {angle - movedAngle.y}");
+
+            if (angle - movedAngle.x <= 22.5f && angle - movedAngle.y <= 22.5f)
+            {
+                gunObj.transform.LookAt(targetObj.transform, Vector3.forward);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

@@ -15,6 +15,8 @@ public class ShotGunScript : LiveGunOriginScript
         fireEnergyReq = 7;
         reloadEnergyReq = (bulletAmount / 10) * fireEnergyReq / 3;
 
+        isShotGun = true;
+
         Preparation();
     }
 
@@ -41,7 +43,7 @@ public class ShotGunScript : LiveGunOriginScript
 
         if (Input.GetButton("Fire1"))
         {
-            StartCoroutine(Fire(true));
+            StartCoroutine(Fire());
         }
     }
 }
