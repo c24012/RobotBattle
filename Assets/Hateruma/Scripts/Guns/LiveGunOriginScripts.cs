@@ -84,7 +84,7 @@ public class LiveGunOriginScript : MonoBehaviour
 
         isRunningFire = true;
 
-        TargetLook(targetObj);
+        //TargetLook(targetObj);
 
         //残弾があれば撃つ
         if (unUsedBulletList.Count > 0 && energySC.UseEnergy(fireEnergyReq))
@@ -167,36 +167,36 @@ public class LiveGunOriginScript : MonoBehaviour
         isReload = false;
     }
 
-    bool TargetLook(GameObject targetObj)
-    {
-        if (targetObj != null)
-        {
+    //bool TargetLook(GameObject targetObj)
+    //{
+    //    if (targetObj != null)
+    //    {
             
 
-            //現在の銃本体の回転の値を取得
-            Vector3 movedAngle = new Vector3(gunObj.transform.localEulerAngles.x, gunObj.transform.localEulerAngles.y);
-            movedAngle.x = movedAngle.x <= 180f ? Mathf.Abs(movedAngle.x) : Mathf.Abs(movedAngle.x - 360f);//X軸
-            movedAngle.y = movedAngle.y <= 180f ? Mathf.Abs(movedAngle.y) : Mathf.Abs(movedAngle.y - 360f);//Y軸
+    //        //現在の銃本体の回転の値を取得
+    //        Vector3 movedAngle = new Vector3(gunObj.transform.localEulerAngles.x, gunObj.transform.localEulerAngles.y);
+    //        movedAngle.x = movedAngle.x <= 180f ? Mathf.Abs(movedAngle.x) : Mathf.Abs(movedAngle.x - 360f);//X軸
+    //        movedAngle.y = movedAngle.y <= 180f ? Mathf.Abs(movedAngle.y) : Mathf.Abs(movedAngle.y - 360f);//Y軸
             
 
-            Vector3 targetDir = targetObj.transform.position - gunObj.transform.position;//ターゲットの方向
-            float angle = Vector3.Angle(targetDir, gunObj.transform.forward);//銃本体とターゲットの方向の差分
+    //        Vector3 targetDir = targetObj.transform.position - gunObj.transform.position;//ターゲットの方向
+    //        float angle = Vector3.Angle(targetDir, gunObj.transform.forward);//銃本体とターゲットの方向の差分
 
-            Debug.Log($"{angle - movedAngle.x} + {angle - movedAngle.y}");
+    //        Debug.Log($"{angle - movedAngle.x} + {angle - movedAngle.y}");
 
-            if (angle - movedAngle.x <= 22.5f && angle - movedAngle.y <= 22.5f)
-            {
-                gunObj.transform.LookAt(targetObj.transform, Vector3.forward);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        else
-        {
-            return false;
-        }
-    }
+    //        if (angle - movedAngle.x <= 22.5f && angle - movedAngle.y <= 22.5f)
+    //        {
+    //            gunObj.transform.LookAt(targetObj.transform, Vector3.forward);
+    //            return true;
+    //        }
+    //        else
+    //        {
+    //            return false;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        return false;
+    //    }
+    //}
 }
